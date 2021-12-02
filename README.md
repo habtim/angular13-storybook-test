@@ -2,26 +2,51 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.0.3.
 
-## Development server
+# Issue
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Steps to reproduce
 
-## Code scaffolding
+- `ng new <project-name>`
+- `ng g library <library-name>`
+- Add some style definitions in the library
+- Add includePath in stylePreprocessorOptions in angular.json
+- Add a custom component/module (in this case button), which consumes styles from style-lib
+- run `npx sb init`
+- Include style library in webpack.config or webpackFinal in main.js
+- Add a story for the previously created button
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## What I expect
+- `npm run storybook` does work
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## What I get
+```
+SassError: expected "{".
+  ╷
+1 │ var api = require("!../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+  │                                                                                                  ^
+  ╵
+  src\app\button\button.component.scss 1:98  root stylesheet
+    at processResult (C:\Users\XXX\Documents\code\angular13-storybook-test\node_modules\webpack\lib\NormalModule.js:751:19)
+    at C:\Users\XXX\Documents\code\angular13-storybook-test\node_modules\webpack\lib\NormalModule.js:853:5
+    at C:\Users\XXX\Documents\code\angular13-storybook-test\node_modules\loader-runner\lib\LoaderRunner.js:399:11
+    at C:\Users\XXX\Documents\code\angular13-storybook-test\node_modules\loader-runner\lib\LoaderRunner.js:251:18
+    at context.callback (C:\Users\XXX\Documents\code\angular13-storybook-test\node_modules\loader-runner\lib\LoaderRunner.js:124:13)
+    at Object.callback (C:\Users\XXX\Documents\code\angular13-storybook-test\node_modules\sass-loader\dist\index.js:54:7)
+    at Worker.<anonymous> (C:\Users\XXX\Documents\code\angular13-storybook-test\node_modules\@angular-devkit\build-angular\src\sass\sass-service.js:123:25)
+    at Worker.emit (events.js:375:28)
+    at MessagePort.<anonymous> (internal/worker.js:216:53)
+    at MessagePort.[nodejs.internal.kHybridDispatch] (internal/event_target.js:399:24)
+    at MessagePort.exports.emitMessage (internal/per_context/messageport.js:18:26)
+SassError: SassError: expected "{".
+  ╷
+1 │ var api = require("!../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+  │                                                                                                  ^
+  ╵
+  src\app\button\button.component.scss 1:98  root stylesheet
+    at Object.callback (C:\Users\XXX\Documents\code\angular13-storybook-test\node_modules\sass-loader\dist\index.js:54:16)
+    at Worker.<anonymous> (C:\Users\XXX\Documents\code\angular13-storybook-test\node_modules\@angular-devkit\build-angular\src\sass\sass-service.js:123:25)
+    at Worker.emit (events.js:375:28)
+    at MessagePort.<anonymous> (internal/worker.js:216:53)
+    at MessagePort.[nodejs.internal.kHybridDispatch] (internal/event_target.js:399:24)
+    at MessagePort.exports.emitMessage (internal/per_context/messageport.js:18:26)
+```
