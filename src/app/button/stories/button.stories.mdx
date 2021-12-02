@@ -1,0 +1,40 @@
+import { Meta, Story, Preview, ArgsTable, Title, PRIMARY_STORY } from '@storybook/addon-docs';
+import { moduleMetadata } from '@storybook/angular';
+import { ButtonComponent } from '../button.component.ts';
+import { ButtonModule } from '../button.module.ts';
+
+
+<Meta
+  title="Basic Button"
+  component={ButtonComponent}
+  argTypes={{ text: { control: 'text' }, disabled: { control: 'boolean' } }}
+  decorators={[
+    moduleMetadata({
+      imports: [ButtonModule]
+    })
+  ]}
+/>
+
+<Title />
+
+<ArgsTable story={PRIMARY_STORY} />
+
+export const Template = (args) => ({
+  props: args
+});
+
+## Default
+
+Just a button.
+
+<Preview>
+  <Story
+    name="Default"
+    args={{
+      text: 'Standard Button',
+      disabled: false
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Preview>
