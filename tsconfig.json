@@ -18,6 +18,12 @@
     "importHelpers": true,
     "target": "es2017",
     "module": "es2020",
+    "paths": {
+      "style-lib": [
+        "dist/style-lib/style-lib",
+        "dist/style-lib"
+      ]
+    },
     "lib": [
       "es2020",
       "dom"
